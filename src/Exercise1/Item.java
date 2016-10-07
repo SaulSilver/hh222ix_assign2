@@ -15,10 +15,16 @@ public class Item implements A2Item {
     private String date;
 
     public Item(String line) {
-        List<String> data = Arrays.asList(line.split(","));
-        performer = data.get(0);
-        transactionValue = Double.parseDouble(data.get(1));
-        date = data.get(2);
+        String[] data = line.split(",");
+        performer = data[0];
+        transactionValue = Double.parseDouble(data[1]);
+        date = data[2];
+    }
+
+    public Item(String perf, double transactionVal, String date) {
+        performer = perf;
+        transactionValue = transactionVal;
+        this.date = date;
     }
 
     @Override
