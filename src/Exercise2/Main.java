@@ -7,17 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  *
  * Created by hatem on 2016-10-05.
  */
-public class Main implements A2Main {
-    public final long NANO_TO_MILLISECOND = 1000000;
+public class Main implements A2Main, Comparable<HashMap<String, Long>> {
     @Override
     public List<Item> readCSVFile(String filename) {
         List<Item> fileData = new ArrayList<>();
@@ -105,16 +101,33 @@ public class Main implements A2Main {
     /** Sort array by transaction value with merging sort algorithm, using priority queue and comparator */
     @Override
     public long heapSortByTransactionValue(List<Item> array) {
-        return 0;
+        long start = System.nanoTime();
+
+        HeapSort heapSort = new HeapSort(array);
+
+        return System.nanoTime() - start;
     }
 
     @Override
     public TreeSet<Map.Entry<String, Long>> compareAlgorithms(List<Item> array) {
-        return null;
+        long bubbleSort = bubbleSortByTransactionValue(array);
+        long quickSort = quickSortByTransactionValue(array);
+        long heapSort = heapSortByTransactionValue(array);
+
+        HashMap<String, Long> mappy = new HashMap<>();
+        mappy.put("BS", bubbleSort);
+        mappy.put("QS", quickSort);
+        mappy.put("HS", heapSort);
+
+        TreeSet<Map.Entry<String, Long>> treeSet = new TreeSet<>();
+        treeSet.addAll(mappy.entrySet());
+
+        return treeSet;
     }
 
     @Override
     public void printResults(TreeSet<Map.Entry<String, Long>> results) {
-
+        for (Map.Entry<String, Long> entry : results)
+            System.out.println(entry);
     }
 }

@@ -2,6 +2,7 @@ import Exercise1.Item;
 import Exercise2.Main;
 
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  *
@@ -11,7 +12,7 @@ public class test {
     public static void main(String[] args) {
         Main main = new Main();
         List<Item> items = main.readCSVFile("/input.txt");
-        long timeSpent = main.quickSortByTransactionValue(items);
-        System.out.println(timeSpent + " ns");
+        TreeSet treeSet = main.compareAlgorithms(items);
+        main.printResults(treeSet);
     }
 }
