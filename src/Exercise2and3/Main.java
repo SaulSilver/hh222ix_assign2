@@ -1,4 +1,4 @@
-package Exercise2;
+package Exercise2and3;
 
 import Exercise1.Item;
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ import java.util.*;
  *
  * Created by hatem on 2016-10-05.
  */
-public class Main implements A2Main, Comparable<HashMap<String, Long>> {
+public class Main implements A2Main{
     @Override
     public List<Item> readCSVFile(String filename) {
         List<Item> fileData = new ArrayList<>();
@@ -114,13 +114,11 @@ public class Main implements A2Main, Comparable<HashMap<String, Long>> {
         long quickSort = quickSortByTransactionValue(array);
         long heapSort = heapSortByTransactionValue(array);
 
-        HashMap<String, Long> mappy = new HashMap<>();
-        mappy.put("BS", bubbleSort);
-        mappy.put("QS", quickSort);
-        mappy.put("HS", heapSort);
-
         TreeSet<Map.Entry<String, Long>> treeSet = new TreeSet<>();
-        treeSet.addAll(mappy.entrySet());
+        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("BS", bubbleSort));
+        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("QS", quickSort));
+        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("HS", heapSort));
+
 
         return treeSet;
     }
@@ -129,5 +127,19 @@ public class Main implements A2Main, Comparable<HashMap<String, Long>> {
     public void printResults(TreeSet<Map.Entry<String, Long>> results) {
         for (Map.Entry<String, Long> entry : results)
             System.out.println(entry);
+    }
+
+    private class MyTreeSet implements Comparable<Map.Entry<String, Long>> {
+        private TreeSet<Map.Entry<String, Long>> treeSet;
+
+        public MyTreeSet() {
+            treeSet = new TreeSet<>();
+        }
+
+
+        @Override
+        public int compareTo(Map.Entry<String, Long> o) {
+            return o1.getValue().compareTo(o2.getValue());
+        }
     }
 }
