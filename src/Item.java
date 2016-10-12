@@ -1,7 +1,3 @@
-package Exercise1;
-
-
-
 /**
  *
  * Created by hatem on 2016-10-05.
@@ -52,5 +48,23 @@ public class Item implements A2Item {
     @Override
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+
+        hash = 53 * hash + performer.hashCode();
+        hash = 53 * hash + (int) transactionValue;
+        hash = 53 * hash + date.hashCode();
+
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != this.getClass())
+            return false;
+        return this.hashCode() == other.hashCode();
     }
 }

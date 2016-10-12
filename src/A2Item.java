@@ -1,5 +1,3 @@
-package Exercise1;
-
 public interface A2Item {
 	public String getPerformer();
 	public double getTransactionValue();

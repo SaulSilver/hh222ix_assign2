@@ -1,6 +1,3 @@
-package Exercise2and3;
-
-import Exercise1.Item;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +10,7 @@ import java.util.*;
  *
  * Created by hatem on 2016-10-05.
  */
-public class Main implements A2Main{
+public class Main implements A2Main {
     @Override
     public List<Item> readCSVFile(String filename) {
         List<Item> fileData = new ArrayList<>();
@@ -33,7 +30,9 @@ public class Main implements A2Main{
         return fileData;
     }
 
-    /** Sort array by transaction value with bubble sort algorithm */
+    /**
+     * Sort array by transaction value with bubble sort algorithm
+     */
     @Override
     public long bubbleSortByTransactionValue(List<Item> array) {
         long start = System.nanoTime();
@@ -46,14 +45,14 @@ public class Main implements A2Main{
         while (flag) {
             flag = false;       //Set flag to false awaiting a possible swap
 
-            for (j = 0; j < array.size()-1; j++) {
+            for (j = 0; j < array.size() - 1; j++) {
                 double value1 = array.get(j).getTransactionValue();
-                double value2 = array.get(j+1).getTransactionValue();
+                double value2 = array.get(j + 1).getTransactionValue();
                 if (value1 < value2) {
                     //Swap elements
                     temp = new Item(array.get(j).getPerformer(), value1, array.get(j).getDate());
-                    array.set(j, array.get(j+1));
-                    array.set(j+1, temp);
+                    array.set(j, array.get(j + 1));
+                    array.set(j + 1, temp);
                     flag = true;
                 }
             }
@@ -61,7 +60,9 @@ public class Main implements A2Main{
         return (System.nanoTime() - start);
     }
 
-    /** Sort array by transaction value with quick sort algorithm */
+    /**
+     * Sort array by transaction value with quick sort algorithm
+     */
     @Override
     public long quickSortByTransactionValue(List<Item> array) {
         long start = System.nanoTime();
@@ -98,7 +99,9 @@ public class Main implements A2Main{
             quicksort(i, high, array);
     }
 
-    /** Sort array by transaction value with merging sort algorithm, using priority queue and comparator */
+    /**
+     * Sort array by transaction value with merging sort algorithm, using priority queue and comparator
+     */
     @Override
     public long heapSortByTransactionValue(List<Item> array) {
         long start = System.nanoTime();
@@ -115,9 +118,9 @@ public class Main implements A2Main{
         long heapSort = heapSortByTransactionValue(array);
 
         TreeSet<Map.Entry<String, Long>> treeSet = new TreeSet<>();
-        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("BS", bubbleSort));
-        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("QS", quickSort));
-        treeSet.add(new AbstractMap.SimpleEntry<String, Long>("HS", heapSort));
+        treeSet.add(new MyMap("BS", bubbleSort));
+        treeSet.add(new MyMap("QS", quickSort));
+        treeSet.add(new MyMap("HS", heapSort));
 
 
         return treeSet;
@@ -129,17 +132,20 @@ public class Main implements A2Main{
             System.out.println(entry);
     }
 
-    private class MyTreeSet implements Comparable<Map.Entry<String, Long>> {
-        private TreeSet<Map.Entry<String, Long>> treeSet;
+    /**
+     * This class implements a custom Comparable for the Map objects that are used for compareAlgorithms(array)
+     */
+    private class MyMap extends AbstractMap.SimpleEntry<String, Long> implements Comparable<MyMap>{
+        private AbstractMap.Entry<String, Long> map;
 
-        public MyTreeSet() {
-            treeSet = new TreeSet<>();
+
+        public MyMap(String key, Long value) {
+            super(key, value);
         }
 
-
         @Override
-        public int compareTo(Map.Entry<String, Long> o) {
-            return o1.getValue().compareTo(o2.getValue());
+        public int compareTo(MyMap o) {
+            return this.getValue().compareTo(o.getValue());
         }
     }
 }

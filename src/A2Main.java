@@ -1,6 +1,3 @@
-package Exercise2and3;
-
-import Exercise1.Item;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
