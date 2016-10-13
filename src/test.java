@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -11,5 +12,7 @@ public class test {
         List<Item> items = main.readCSVFile("/input.txt");
         TreeSet treeSet = main.compareAlgorithms(items);
         main.printResults(treeSet);
+
+     //   HashMap<> hashyMashy = new HashMap();
     }
 }
