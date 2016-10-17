@@ -56,11 +56,7 @@ public class Item implements A2Item{
     public int hashCode() {
         int hash = 3;
 
-        hash = 53 * hash + performer.hashCode();
-        hash = 53 * hash + (int) transactionValue;
-        hash = 53 * hash + date.hashCode();
-
-        return hash;
+        return 53 * hash + performer.hashCode();
     }
 
     @Override

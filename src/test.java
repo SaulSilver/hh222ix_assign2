@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  *
@@ -11,8 +9,18 @@ public class test {
         Main main = new Main();
         List<Item> items = main.readCSVFile("/input.txt");
         TreeSet treeSet = main.compareAlgorithms(items);
+        System.out.println("Algorithms timings:");
         main.printResults(treeSet);
 
-     //   HashMap<> hashyMashy = new HashMap();
+        HashMap hashyMashy = new HashMap();
+        for (Item i : items)
+            hashyMashy.put(i.getPerformer(), i.hashCode());
+
+        Iterator iterator = hashyMashy.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry me = (Map.Entry) iterator.next();
+            System.out.println("Key: " + me.getKey() + ", Value: " + me.getValue());
+        }
     }
 }
