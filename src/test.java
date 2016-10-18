@@ -12,9 +12,9 @@ public class test {
         System.out.println("Algorithms timings:");
         main.printResults(treeSet);
 
-        HashMap hashyMashy = new HashMap();
+        HashMap<Item, String> hashyMashy = new HashMap();
         for (Item i : items)
-            hashyMashy.put(i.getPerformer(), i.hashCode());
+            hashyMashy.put(i, i.getPerformer());
 
         Iterator iterator = hashyMashy.entrySet().iterator();
 
